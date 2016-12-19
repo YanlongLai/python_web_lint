@@ -4,11 +4,12 @@ from bs4 import BeautifulSoup, NavigableString
 import time
 import json
 import random
-# import re
 
+# depulicate algo
 def RiteshKumar(l):
     return list(set([x for x in l if l.count(x) > 1]))
 
+# random color
 def hexCodeColors():
     a = hex(random.randrange(0,256))
     b = hex(random.randrange(0,256))
@@ -25,55 +26,35 @@ def hexCodeColors():
     z = a + b + c
     return "#" + z.upper()
 
+# default config
 url = 'http://www.viki.com'
 req = Request(url, headers={'User-Agent': 'Mozilla/5.0'})
 html = urlopen(req)
 bsObj = BeautifulSoup(html.read(), "html.parser")
 
-# find depulcate links of homepage
+# find duplicate links of homepage
 links = []
 for link in bsObj.findAll("a"):
     links.append(link.get('href'))
 
-# for item in links:
-#     print item
-
-
 links = RiteshKumar(links)
 
-# test depulcate output
-# for item in links:
-#     print item
-
-# find all a tag link and class for mapping
-response = []
-for link in bsObj.findAll("a"):
-    classSet = link.get('class')
-    if classSet is not None:
-        classSet = " ".join(str(x) for x in link.get('class'))
-    else :
-        classSet = ""
-    response.append({'href': link.get('href'), 'class': classSet })
-
-# highlight the depulcate links
-# for a in bsObj.findAll('a'):
-#     if a.get('href') in links:
-#         a['style'] = "background: yellow;"
-depulcateIndex = 0
-for depulcateLink in links:
+# highlight the duplicate links
+duplicateIndex = 0
+for duplicateLink in links:
     color = hexCodeColors()
-    depulcateIndex = depulcateIndex + 1
+    duplicateIndex = duplicateIndex + 1
     for a in bsObj.findAll('a'):
-        if a.get('href') is depulcateLink:
-            print a.get('href')
-            # a['style'] = "background: " + color + ";"
-            # a.insert(0, NavigableString("(" + str(depulcateIndex) + ")"))
-            a['style'] = "border-style: solid; border-width: 8px; border-color: " + color + ";"
+        if a.get('href') == duplicateLink:
+            # add tag
+            a.insert(0, NavigableString("(" + str(duplicateIndex) + ")"))
+            a['style'] = "border-style: solid; border-width: 8px; border-radius:20px; border-color: " + color + ";"
 
+# use homepage css
 for linkSource in bsObj.findAll("link"):
     linkSource['href'] = linkSource['href'].replace("//","http://")
 
-
+# new page
 html = bsObj.prettify("utf-8")
 with open("output.html", "wb") as file:
     file.write(html)
