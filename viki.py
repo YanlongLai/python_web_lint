@@ -48,7 +48,7 @@ for duplicateLink in links:
         if a.get('href') == duplicateLink:
             # add tag
             a.insert(0, NavigableString("(" + str(duplicateIndex) + ")"))
-            a['style'] = "border-style: solid; border-width: 8px; border-radius:20px; border-color: " + color + ";"
+            a['style'] = "border-style: solid; border-width: 8px; border-color: " + color + ";"
 
 # use homepage css
 for linkSource in bsObj.findAll("link"):
@@ -56,5 +56,6 @@ for linkSource in bsObj.findAll("link"):
 
 # new page
 html = bsObj.prettify("utf-8")
-with open("output.html", "wb") as file:
+timestr = time.strftime("%Y%m%d_%H%M%S")
+with open("viki_" + timestr + ".html", "wb") as file:
     file.write(html)
