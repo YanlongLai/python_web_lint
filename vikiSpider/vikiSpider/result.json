@@ -1,0 +1,7 @@
+<a href="#" id="trigger" data-modal-action="close" data-modal="data-modal-mobile-banner" class="hidden" data-block-track="modalClose"></a>
+<a href="#" class="close-link" data-modal-action="close" data-mobile-browse="1" title="Or continue browsing"><i class="icon icon-x"></i></a>
+<a href="#" class="btn btn-accent btn-primary btn-download-app" data-mobile-download="1" data-utm-params="">Download App</a>
+<a href="#" class="btn btn-primary btn-play-app deepLink appPlay mbn hidden">Play on App</a>
+<a href="https://www.viki.com" data-block-track="homeLogo"><span>Viki - Global TV Powered by Fans</span></a>
+<a class="js-site-nav"><i class="icon-menu"></i></a>
+<a href="/search" class="js-site-search"><i class="icon-search"></i></a>
